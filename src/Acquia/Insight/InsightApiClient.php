@@ -9,8 +9,8 @@ use Guzzle\Service\Client;
 
 class InsightApiClient extends Client implements ServiceManagerAware
 {
-    const BASE_URL         = 'https://api.insight.acquia.com/';
-    const BASE_PATH        = 'api/v1';
+    const BASE_URL         = 'https://api.insight.acquia.com';
+    const BASE_PATH        = '/api/v1';
 
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class InsightApiClient extends Client implements ServiceManagerAware
             'base_path' => self::BASE_PATH,
         );
 
-        // Instantiate the Acquia Search plugin.
+        // Instantiate the Acquia Insight API plugin.
         $config = Collection::fromConfig($config, $defaults, $required);
         $client = new static($config->get('base_url'), $config);
         $client->setDefaultHeaders(array(
@@ -61,7 +61,7 @@ class InsightApiClient extends Client implements ServiceManagerAware
      *
      * @throws \Guzzle\Http\Exception\ClientErrorResponseException
      */
-    public function subscriptions()
+    public function getSubscriptions()
     {
         $result = $this->call('{+base_path}/subscriptions');
         return $result;
@@ -71,7 +71,7 @@ class InsightApiClient extends Client implements ServiceManagerAware
      * @param string $subscription_uuid
      * @return array
      */
-    public function sites($subscription_uuid)
+    public function getSitesBySubscription($subscription_uuid)
     {
         $result = $this->call('{+base_path}/subscriptions/' . $subscription_uuid . '/sites');
         return $result;
@@ -79,9 +79,9 @@ class InsightApiClient extends Client implements ServiceManagerAware
 
     /**
      * @param string $site_uuid
-     * @return array|bool|float|int|string
+     * @return array
      */
-    public function site($site_uuid)
+    public function getSite($site_uuid)
     {
         $result = $this->call('{+base_path}/sites/' . $site_uuid);
         return $result;
@@ -89,11 +89,31 @@ class InsightApiClient extends Client implements ServiceManagerAware
 
     /**
      * @param string $site_uuid
-     * @return array|bool|float|int|string
+     * @return array
      */
-    public function score($site_uuid)
+    public function getScore($site_uuid)
     {
         $result = $this->call('{+base_path}/sites/' . $site_uuid . '/score');
+        return $result;
+    }
+
+    /**
+     * @param string $site_uuid
+     * @return array
+     */
+    public function getScoreHistory($site_uuid)
+    {
+        $result = $this->call('{+base_path}/sites/' . $site_uuid . '/score-history');
+        return $result;
+    }
+
+    /**
+     * @param string $site_uuid
+     * @return array
+     */
+    public function getAlerts($site_uuid)
+    {
+        $result = $this->call('{+base_path}/sites/' . $site_uuid . '/alerts');
         return $result;
     }
 
