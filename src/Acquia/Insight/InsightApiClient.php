@@ -28,6 +28,7 @@ class InsightApiClient extends Client implements ServiceManagerAware
         $defaults = array(
             'base_url' => self::BASE_URL,
             'base_path' => self::BASE_PATH,
+            'ssl_verify' => true,
         );
 
         // Instantiate the Acquia Insight API plugin.
@@ -126,6 +127,11 @@ class InsightApiClient extends Client implements ServiceManagerAware
     protected function call($path)
     {
         $request = $this->get($path);
+        // Support disabling SSL peer verification.
+        if (!$this->getConfig('ssl_verify')) {
+            $request->getCurlOptions()->set(CURLOPT_SSL_VERIFYHOST, false);
+            $request->getCurlOptions()->set(CURLOPT_SSL_VERIFYPEER, false);
+        }
         return $request->send()->json();
     }
 }
