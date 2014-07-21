@@ -1,0 +1,24 @@
+{
+    "f93dbb19-a6a0-11e2-b0d3-12313931d529": {
+        "title": "No variables sent - Limited alerts",
+        "ignored": false,
+        "solved": false,
+        "types": [
+            "best_practices",
+            "general",
+            "high_level"
+        ],
+        "severity": "128"
+    },
+    "f93dbb1b-a6a0-11e2-b0d3-12313931d529": {
+        "title": "Anonymous users have admin privileges",
+        "ignored": false,
+        "solved": false,
+        "types": [
+            "general",
+            "security",
+            "high_level"
+        ],
+        "severity": "128"
+    }
+}
