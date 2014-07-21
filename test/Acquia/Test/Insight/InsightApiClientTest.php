@@ -109,8 +109,12 @@ class InsightApiClientTest extends \PHPUnit_Framework_TestCase
         $response = $insight_api->getSubscriptions();
 
         $expectedResponse = array(
-            "1374790424" => "80",
-            "1382473288" => "65"
+            "1374790424" => array(
+                "score" => "80"
+            ),
+            "1382473288" => array(
+                "score" => "65"
+            )
         );
 
         $this->assertSame($expectedResponse, $response);
