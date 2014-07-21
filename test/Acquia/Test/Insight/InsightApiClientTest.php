@@ -38,8 +38,12 @@ class InsightApiClientTest extends \PHPUnit_Framework_TestCase
         $response = $insight_api->getSubscriptions();
 
         $expectedResponse = array(
-            "401325b5-326d-7a84-b1df-40ae95fb45f5" => "site.example.com",
-            "40133b14-ee0c-102e-83df-1231390f2cc1" => "example.com"
+            "401325b5-326d-7a84-b1df-40ae95fb45f5" => array(
+                "name" => "site.example.com"
+            ),
+            "40133b14-ee0c-102e-83df-1231390f2cc1" => array(
+               "name" => "example.com"
+            ),
         );
 
         $this->assertSame($expectedResponse, $response);
