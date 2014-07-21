@@ -6,6 +6,7 @@ use Acquia\Rest\ServiceManagerAware;
 use Guzzle\Common\Collection;
 use Acquia\Json\Json;
 use Guzzle\Service\Client;
+use Acquia\Cloud\Api\CloudApiAuthPlugin;
 
 class InsightApiClient extends Client implements ServiceManagerAware
 {
@@ -39,7 +40,7 @@ class InsightApiClient extends Client implements ServiceManagerAware
             'Accept' => 'application/json',
         ));
 
-        $plugin = new InsightApiAuthPlugin($config->get('username'), $config->get('password'));
+        $plugin = new CloudApiAuthPlugin($config->get('username'), $config->get('password'));
         $client->addSubscriber($plugin);
 
         return $client;
